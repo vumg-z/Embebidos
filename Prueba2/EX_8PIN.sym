@@ -1,0 +1,60 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+006     PORTB
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+021     main.@SCRATCH1
+022     @delay_ms1.P1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+086     TRISB
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @READ_PROGRAM_MEMORY8.P1
+10D-10E @WRITE_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  @delay_ms1
+000019  @cinit1
+000019  main
+000023  @cinit2
+
+Project Directory:
+    C:\Users\USER\Desktop\Embebidos PIC\Prueba2\
+
+Project Files:
+    EX_8PIN.c                                               [03-Sep-23 20:28  CRC=9724311F]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [12-Nov-13 14:35  CRC=81334808]
+
+Source signature=998AC12F
+
+Units:
+    EX_8PIN (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-255
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   EX_8PIN.xsym
+    Errors:      EX_8PIN.err
+    Ext Symbols: EX_8PIN.esym
+    INHX8:       EX_8PIN.hex
+    Symbols:     EX_8PIN.sym
+    List:        EX_8PIN.lst
+    Debug/COFF:  EX_8PIN.cof
+    Project:     EX_8PIN.ccspjt
+    Call Tree:   EX_8PIN.tre
+    Statistics:  EX_8PIN.STA

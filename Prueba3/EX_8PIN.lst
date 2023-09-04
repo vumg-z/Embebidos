@@ -1,0 +1,508 @@
+CCS PCM C Compiler, Version 5.015, 5967               03-Sep-23 21:59
+
+               Filename:   C:\Users\USER\Desktop\Embebidos PIC\Prueba3\EX_8PIN.lst
+
+               ROM used:   374 words (5%)
+                           Largest free fragment is 2048
+               RAM used:   7 (2%) at main() level
+                           24 (7%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   057
+0003:  NOP
+.................... #include <16F877A.h> 
+.................... //////////// Standard Header file for the PIC16F877A device //////////////// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... ////        (C) Copyright 1996, 2013 Custom Computer Services          //// 
+.................... //// This source code may only be used by licensed users of the CCS C  //// 
+.................... //// compiler.  This source code may only be distributed to other      //// 
+.................... //// licensed users of the CCS C compiler.  No other use, reproduction //// 
+.................... //// or distribution is permitted without written permission.          //// 
+.................... //// Derivative programs created using this software in object code    //// 
+.................... //// form are not restricted in any way.                               //// 
+.................... /////////////////////////////////////////////////////////////////////////// 
+.................... #device PIC16F877A 
+*
+0019:  MOVF   32,W
+001A:  CLRF   78
+001B:  SUBWF  31,W
+001C:  BTFSC  03.0
+001D:  GOTO   021
+001E:  MOVF   31,W
+001F:  MOVWF  77
+0020:  GOTO   02D
+0021:  CLRF   77
+0022:  MOVLW  08
+0023:  MOVWF  33
+0024:  RLF    31,F
+0025:  RLF    77,F
+0026:  MOVF   32,W
+0027:  SUBWF  77,W
+0028:  BTFSC  03.0
+0029:  MOVWF  77
+002A:  RLF    78,F
+002B:  DECFSZ 33,F
+002C:  GOTO   024
+002D:  BCF    0A.3
+002E:  BCF    0A.4
+002F:  GOTO   0DF (RETURN)
+0030:  CLRF   77
+0031:  CLRF   78
+0032:  MOVF   2F,W
+0033:  BCF    03.0
+0034:  BTFSC  30.0
+0035:  ADDWF  77,F
+0036:  RRF    77,F
+0037:  RRF    78,F
+0038:  BTFSC  30.1
+0039:  ADDWF  77,F
+003A:  RRF    77,F
+003B:  RRF    78,F
+003C:  BTFSC  30.2
+003D:  ADDWF  77,F
+003E:  RRF    77,F
+003F:  RRF    78,F
+0040:  BTFSC  30.3
+0041:  ADDWF  77,F
+0042:  RRF    77,F
+0043:  RRF    78,F
+0044:  BTFSC  30.4
+0045:  ADDWF  77,F
+0046:  RRF    77,F
+0047:  RRF    78,F
+0048:  BTFSC  30.5
+0049:  ADDWF  77,F
+004A:  RRF    77,F
+004B:  RRF    78,F
+004C:  BTFSC  30.6
+004D:  ADDWF  77,F
+004E:  RRF    77,F
+004F:  RRF    78,F
+0050:  BTFSC  30.7
+0051:  ADDWF  77,F
+0052:  RRF    77,F
+0053:  RRF    78,F
+0054:  BCF    0A.3
+0055:  BCF    0A.4
+0056:  GOTO   169 (RETURN)
+....................  
+.................... #list 
+....................  
+.................... #fuses XT, NOWDT 
+.................... #use delay (clock=4M) 
+*
+0004:  MOVLW  30
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   018
+000A:  MOVLW  01
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  4A
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  GOTO   016
+0016:  DECFSZ 00,F
+0017:  GOTO   00A
+0018:  RETURN
+.................... #byte TRISB=0x86 
+.................... #byte PORTB=0x06 
+.................... #byte TRISA=0x85 
+.................... #byte PORTA=0x05 
+....................  
+.................... void main(){ 
+*
+0057:  MOVF   03,W
+0058:  ANDLW  1F
+0059:  MOVWF  03
+005A:  BSF    03.5
+005B:  BSF    1F.0
+005C:  BSF    1F.1
+005D:  BSF    1F.2
+005E:  BCF    1F.3
+005F:  MOVLW  07
+0060:  MOVWF  1C
+0061:  BCF    03.7
+....................    output_b(0x00); 
+0062:  CLRF   06
+0063:  BCF    03.5
+0064:  CLRF   06
+....................    output_a(0x00); 
+0065:  BSF    03.5
+0066:  CLRF   05
+0067:  BCF    03.5
+0068:  CLRF   05
+....................    TRISA = 0xFF;  // Set PORTA as input 
+0069:  MOVLW  FF
+006A:  BSF    03.5
+006B:  MOVWF  05
+....................    TRISB = 0x00;  // Set PORTB as output 
+006C:  CLRF   06
+....................  
+....................    while(true) { 
+....................       int option = input_a() & 0x3F;  // Read 6 lower bits from DIP switch 
+006D:  MOVLW  FF
+006E:  MOVWF  05
+006F:  BCF    03.5
+0070:  MOVF   05,W
+0071:  ANDLW  3F
+0072:  MOVWF  21
+....................       output_b(option);  // Display the current option using LEDs 
+0073:  BSF    03.5
+0074:  CLRF   06
+0075:  BCF    03.5
+0076:  MOVF   21,W
+0077:  MOVWF  06
+....................       delay_ms(5000); 
+0078:  MOVLW  14
+0079:  MOVWF  2F
+007A:  MOVLW  FA
+007B:  MOVWF  30
+007C:  CALL   004
+007D:  DECFSZ 2F,F
+007E:  GOTO   07A
+....................  
+....................       switch(option) { 
+007F:  MOVF   21,W
+0080:  BTFSC  03.2
+0081:  GOTO   092
+0082:  XORLW  01
+0083:  BTFSC  03.2
+0084:  GOTO   0B0
+0085:  XORLW  03
+0086:  BTFSC  03.2
+0087:  GOTO   0E7
+0088:  XORLW  01
+0089:  BTFSC  03.2
+008A:  GOTO   118
+008B:  XORLW  07
+008C:  BTFSC  03.2
+008D:  GOTO   12D
+008E:  XORLW  01
+008F:  BTFSC  03.2
+0090:  GOTO   153
+0091:  GOTO   173
+....................          case 0:  // Rotate a single bit left 
+....................             for(int i = 0; i < 8; i++) { 
+0092:  CLRF   22
+0093:  MOVF   22,W
+0094:  SUBLW  07
+0095:  BTFSS  03.0
+0096:  GOTO   0AF
+....................                output_b(1 << i); 
+0097:  MOVLW  01
+0098:  MOVWF  2F
+0099:  MOVF   22,W
+009A:  MOVWF  78
+009B:  BTFSC  03.2
+009C:  GOTO   0A1
+009D:  BCF    03.0
+009E:  RLF    2F,F
+009F:  DECFSZ 78,F
+00A0:  GOTO   09D
+00A1:  BSF    03.5
+00A2:  CLRF   06
+00A3:  BCF    03.5
+00A4:  MOVF   2F,W
+00A5:  MOVWF  06
+....................                delay_ms(500); 
+00A6:  MOVLW  02
+00A7:  MOVWF  2F
+00A8:  MOVLW  FA
+00A9:  MOVWF  30
+00AA:  CALL   004
+00AB:  DECFSZ 2F,F
+00AC:  GOTO   0A8
+00AD:  INCF   22,F
+00AE:  GOTO   093
+....................             } 
+....................             break; 
+00AF:  GOTO   173
+....................  
+....................          case 1:  // Calculate and display the average of three input values 
+....................              
+....................              
+....................   
+....................             int x, y, z; 
+....................             x = input_a() & 0x3F;  // Mask to 6 bits 
+00B0:  MOVLW  FF
+00B1:  BSF    03.5
+00B2:  MOVWF  05
+00B3:  BCF    03.5
+00B4:  MOVF   05,W
+00B5:  ANDLW  3F
+00B6:  MOVWF  23
+....................             delay_ms(2000); 
+00B7:  MOVLW  08
+00B8:  MOVWF  2F
+00B9:  MOVLW  FA
+00BA:  MOVWF  30
+00BB:  CALL   004
+00BC:  DECFSZ 2F,F
+00BD:  GOTO   0B9
+....................              
+....................             y = input_a() & 0x3F;  // Mask to 6 bits 
+00BE:  MOVLW  FF
+00BF:  BSF    03.5
+00C0:  MOVWF  05
+00C1:  BCF    03.5
+00C2:  MOVF   05,W
+00C3:  ANDLW  3F
+00C4:  MOVWF  24
+....................             delay_ms(2000); 
+00C5:  MOVLW  08
+00C6:  MOVWF  2F
+00C7:  MOVLW  FA
+00C8:  MOVWF  30
+00C9:  CALL   004
+00CA:  DECFSZ 2F,F
+00CB:  GOTO   0C7
+....................              
+....................             z = input_a() & 0x3F;  // Mask to 6 bits 
+00CC:  MOVLW  FF
+00CD:  BSF    03.5
+00CE:  MOVWF  05
+00CF:  BCF    03.5
+00D0:  MOVF   05,W
+00D1:  ANDLW  3F
+00D2:  MOVWF  25
+....................             output_b(0x00);  // Turn off input indicator 
+00D3:  BSF    03.5
+00D4:  CLRF   06
+00D5:  BCF    03.5
+00D6:  CLRF   06
+....................  
+....................             int average = (x + y + z) / 3; 
+00D7:  MOVF   24,W
+00D8:  ADDWF  23,W
+00D9:  ADDWF  25,W
+00DA:  MOVWF  30
+00DB:  MOVWF  31
+00DC:  MOVLW  03
+00DD:  MOVWF  32
+00DE:  GOTO   019
+00DF:  MOVF   78,W
+00E0:  MOVWF  26
+....................             output_b(average); 
+00E1:  BSF    03.5
+00E2:  CLRF   06
+00E3:  BCF    03.5
+00E4:  MOVF   26,W
+00E5:  MOVWF  06
+....................             break; 
+00E6:  GOTO   173
+....................              
+....................              
+....................          case 2:  // Find and display the maximum of three input values 
+....................             int max = 0; 
+00E7:  CLRF   27
+....................             x = input_a() & 0x3F;  // Mask to 6 bits 
+00E8:  MOVLW  FF
+00E9:  BSF    03.5
+00EA:  MOVWF  05
+00EB:  BCF    03.5
+00EC:  MOVF   05,W
+00ED:  ANDLW  3F
+00EE:  MOVWF  23
+....................             delay_ms(100); 
+00EF:  MOVLW  64
+00F0:  MOVWF  30
+00F1:  CALL   004
+....................             y = input_a() & 0x3F;  // Mask to 6 bits 
+00F2:  MOVLW  FF
+00F3:  BSF    03.5
+00F4:  MOVWF  05
+00F5:  BCF    03.5
+00F6:  MOVF   05,W
+00F7:  ANDLW  3F
+00F8:  MOVWF  24
+....................             delay_ms(100); 
+00F9:  MOVLW  64
+00FA:  MOVWF  30
+00FB:  CALL   004
+....................             z = input_a() & 0x3F;  // Mask to 6 bits 
+00FC:  MOVLW  FF
+00FD:  BSF    03.5
+00FE:  MOVWF  05
+00FF:  BCF    03.5
+0100:  MOVF   05,W
+0101:  ANDLW  3F
+0102:  MOVWF  25
+....................  
+....................             if (y > x) { 
+0103:  MOVF   24,W
+0104:  SUBWF  23,W
+0105:  BTFSC  03.0
+0106:  GOTO   10A
+....................                max = y; 
+0107:  MOVF   24,W
+0108:  MOVWF  27
+....................             } else { 
+0109:  GOTO   10C
+....................                max = x; 
+010A:  MOVF   23,W
+010B:  MOVWF  27
+....................             } 
+....................  
+....................             if (z > max) { 
+010C:  MOVF   25,W
+010D:  SUBWF  27,W
+010E:  BTFSC  03.0
+010F:  GOTO   112
+....................                max = z; 
+0110:  MOVF   25,W
+0111:  MOVWF  27
+....................             } 
+....................  
+....................             output_b(max); 
+0112:  BSF    03.5
+0113:  CLRF   06
+0114:  BCF    03.5
+0115:  MOVF   27,W
+0116:  MOVWF  06
+....................             break; 
+0117:  GOTO   173
+....................  
+....................          case 3:  // Display even numbers from 0 to 90 
+....................             for (int i2 = 0; i2 <= 90; i2 += 2) { 
+0118:  CLRF   28
+0119:  MOVF   28,W
+011A:  SUBLW  5A
+011B:  BTFSS  03.0
+011C:  GOTO   12C
+....................                output_b(i); 
+011D:  BSF    03.5
+011E:  CLRF   06
+011F:  BCF    03.5
+0120:  MOVF   22,W
+0121:  MOVWF  06
+....................                delay_ms(500); 
+0122:  MOVLW  02
+0123:  MOVWF  2F
+0124:  MOVLW  FA
+0125:  MOVWF  30
+0126:  CALL   004
+0127:  DECFSZ 2F,F
+0128:  GOTO   124
+0129:  MOVLW  02
+012A:  ADDWF  28,F
+012B:  GOTO   119
+....................             } 
+....................             break; 
+012C:  GOTO   173
+....................  
+....................          case 4:  // Display numbers between two inputs with a delay 
+....................             int start, end; 
+....................             start = input_a() & 0x3F;  // Mask to 6 bits 
+012D:  MOVLW  FF
+012E:  BSF    03.5
+012F:  MOVWF  05
+0130:  BCF    03.5
+0131:  MOVF   05,W
+0132:  ANDLW  3F
+0133:  MOVWF  29
+....................             delay_ms(100); 
+0134:  MOVLW  64
+0135:  MOVWF  30
+0136:  CALL   004
+....................             end = input_a() & 0x3F;    // Mask to 6 bits 
+0137:  MOVLW  FF
+0138:  BSF    03.5
+0139:  MOVWF  05
+013A:  BCF    03.5
+013B:  MOVF   05,W
+013C:  ANDLW  3F
+013D:  MOVWF  2A
+....................  
+....................             for (int i3 = start; i3 <= end; i3++) { 
+013E:  MOVF   29,W
+013F:  MOVWF  2B
+0140:  MOVF   2B,W
+0141:  SUBWF  2A,W
+0142:  BTFSS  03.0
+0143:  GOTO   152
+....................                output_b(i); 
+0144:  BSF    03.5
+0145:  CLRF   06
+0146:  BCF    03.5
+0147:  MOVF   22,W
+0148:  MOVWF  06
+....................                delay_ms(500); 
+0149:  MOVLW  02
+014A:  MOVWF  2F
+014B:  MOVLW  FA
+014C:  MOVWF  30
+014D:  CALL   004
+014E:  DECFSZ 2F,F
+014F:  GOTO   14B
+0150:  INCF   2B,F
+0151:  GOTO   140
+....................             } 
+....................             break; 
+0152:  GOTO   173
+....................  
+....................          case 5:  // Perform the specified equation and display the result 
+....................             int x2, y2, result; 
+....................             x2 = input_a() & 0x0F;  // Mask to 4 bits 
+0153:  MOVLW  FF
+0154:  BSF    03.5
+0155:  MOVWF  05
+0156:  BCF    03.5
+0157:  MOVF   05,W
+0158:  ANDLW  0F
+0159:  MOVWF  2C
+....................             delay_ms(100); 
+015A:  MOVLW  64
+015B:  MOVWF  30
+015C:  CALL   004
+....................             y2 = input_a() & 0x0F;  // Mask to 4 bits 
+015D:  MOVLW  FF
+015E:  BSF    03.5
+015F:  MOVWF  05
+0160:  BCF    03.5
+0161:  MOVF   05,W
+0162:  ANDLW  0F
+0163:  MOVWF  2D
+....................  
+....................             result = (x2 * x2) - (2 * y2); 
+0164:  MOVF   2C,W
+0165:  MOVWF  2F
+0166:  MOVF   2C,W
+0167:  MOVWF  30
+0168:  GOTO   030
+0169:  BCF    03.0
+016A:  RLF    2D,W
+016B:  SUBWF  78,W
+016C:  MOVWF  2E
+....................             output_b(result); 
+016D:  BSF    03.5
+016E:  CLRF   06
+016F:  BCF    03.5
+0170:  MOVF   2E,W
+0171:  MOVWF  06
+....................             break; 
+0172:  GOTO   173
+....................  
+....................          default: 
+....................             break; 
+....................       } 
+0173:  BSF    03.5
+0174:  GOTO   06D
+....................    } 
+.................... } 
+....................  
+0175:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F71   XT NOWDT PUT BROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

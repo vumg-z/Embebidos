@@ -1,0 +1,94 @@
+#include <16F877A.h>
+#fuses XT, NOWDT
+#use delay (clock=4M)
+#byte TRISB=0x86
+#byte PORTB=0x06
+#byte TRISA=0x85
+#byte PORTA=0x05
+
+void main(){
+   output_b(0x00);
+   output_a(0x00);
+   TRISA = 0xFF;  // Set PORTA as input
+   TRISB = 0x00;  // Set PORTB as output
+
+   while(true) {
+      int option = input_a() & 0x3F;  // Read 6 lower bits from DIP switch
+
+      switch(option) {
+         case 0:  // Rotate a single bit left
+            for(int i = 0; i < 8; i++) {
+               output_b(1 << i);
+               delay_ms(500);
+            }
+            break;
+
+         case 1:  // Calculate and display the average of three input values
+            output_b(0x01);  // Indicate that input is expected
+            int x, y, z;
+            x = input_a() & 0x3F;  // Mask to 6 bits
+            delay_ms(1000);
+            y = input_a() & 0x3F;  // Mask to 6 bits
+            delay_ms(1000);
+            z = input_a() & 0x3F;  // Mask to 6 bits
+            output_b(0x00);  // Turn off input indicator
+
+            int average = (x + y + z) / 3;
+            output_b(average);
+            break;
+         case 2:  // Find and display the maximum of three input values
+            int max = 0;
+            x = input_a() & 0x3F;  // Mask to 6 bits
+            delay_ms(100);
+            y = input_a() & 0x3F;  // Mask to 6 bits
+            delay_ms(100);
+            z = input_a() & 0x3F;  // Mask to 6 bits
+
+            if (y > x) {
+               max = y;
+            } else {
+               max = x;
+            }
+
+            if (z > max) {
+               max = z;
+            }
+
+            output_b(max);
+            break;
+
+         case 3:  // Display even numbers from 0 to 90
+            for (int i2 = 0; i2 <= 90; i2 += 2) {
+               output_b(i);
+               delay_ms(500);
+            }
+            break;
+
+         case 4:  // Display numbers between two inputs with a delay
+            int start, end;
+            start = input_a() & 0x3F;  // Mask to 6 bits
+            delay_ms(100);
+            end = input_a() & 0x3F;    // Mask to 6 bits
+
+            for (int i3 = start; i3 <= end; i3++) {
+               output_b(i);
+               delay_ms(500);
+            }
+            break;
+
+         case 5:  // Perform the specified equation and display the result
+            int x2, y2, result;
+            x2 = input_a() & 0x0F;  // Mask to 4 bits
+            delay_ms(100);
+            y2 = input_a() & 0x0F;  // Mask to 4 bits
+
+            result = (x2 * x2) - (2 * y2);
+            output_b(result);
+            break;
+
+         default:
+            break;
+      }
+   }
+}
+

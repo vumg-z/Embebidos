@@ -1,0 +1,19 @@
+[PROJECT]
+Target=EX_8PIN.hex
+Processor_Text=PIC16F877A
+CCSVersion=5.015
+Compiler=PCM
+[Target Data]
+FileList=EX_8PIN.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[EX_8PIN.c]
+Type=4
+[mru-list]
+1=EX_8PIN.c
+[Opened Files]
+1=EX_8PIN.c
+2=
+[Units]
+Count=1
+1=EX_8PIN (main)
